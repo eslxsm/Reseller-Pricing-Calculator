@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reseller Profit Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: #00b894;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        h2 {
+            color: #2d3436;
+        }
+
+        .result, .advice {
+            margin-top: 20px;
+            background: #dff9fb;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .advice {
+            background: #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📦 Reseller Profit Calculator</h2>
+        <form method="POST">
+            <label>Cost Price (₹)</label>
+            <input type="number" name="cost" step="0.01" required>
+
+            <label>Shipping Cost (₹)</label>
+            <input type="number" name="shipping" step="0.01" required>
+
+            <label>Platform Commission (%)</label>
+            <input type="number" name="commission" step="0.01" required>
+
+            <label>GST (%)</label>
+            <input type="number" name="gst" step="0.01" required>
+
+            <label>Selling Price (₹)</label>
+            <input type="number" name="selling_price" step="0.01" required>
+
+            <label>Competitor Price (₹)</label>
+            <input type="number" name="competitor_price" step="0.01" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <strong>Total Cost (with fees): ₹{{ result.total_cost }}</strong><br>
+                <strong>Profit: ₹{{ result.profit }} ({{ result.profit_percent }}%)</strong><br>
+            </div>
+        {% endif %}
+
+        {% if advice %}
+            <div class="advice">
+                {{ advice }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
